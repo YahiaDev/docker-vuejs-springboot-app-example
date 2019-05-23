@@ -1,0 +1,19 @@
+
+<section class="home">
+  <div class="home__card">
+    
+    <b-form-input v-model="bookTitle" type="text" placeholder="Enter book title" />
+      
+    <b-card v-for="(book, index) in selectedBooks" :key="book.id">
+      <b-media>
+        <b-img slot="aside" blank blank-color="#ccc" width="64" alt="placeholder" />
+  
+        <h5 class="mt-0 home__card__text">{{ book.title }}</h5>
+        <p class="home__card__text">
+          {{ book.description }}
+        </p>
+      </b-media>
+    </b-card>
+  </div>
+</section>
+

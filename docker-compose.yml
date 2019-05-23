@@ -1,0 +1,53 @@
+version: '3.6'
+services:
+  db:
+    image: postgres
+    #hostname: postgres
+    container_name: books-docker-db
+    environment:
+      POSTGRES_PASSWORD: books
+      POSTGRES_USER: books
+      POSTGRES_DB: books
+    ports:
+      #- 5433:5432
+      - target: 5432
+        published: 5433
+        protocol: tcp
+        mode: host
+    networks:
+      - backdb
+    expose: 
+      - 5433
+  
+  back:
+    build: 
+      context: ./back
+      target:  finalApp
+    image: yahiadev/books-back
+    container_name: books-backend
+    #environment:
+    #  WAIT_HOSTS: postgres:5433
+    ports:
+      - 8090:8090
+    depends_on:
+      - db
+    networks:
+     # - frontback 
+      - backdb
+
+  front:
+    build: ./front
+    image: yahiadev/books-front
+    container_name: books-front
+    ports:
+      - 8080:8080
+    depends_on:
+      - back
+    networks: 
+      - frontback     
+  
+networks: 
+  backdb:
+    driver: bridge
+  frontback:
+    driver: bridge
