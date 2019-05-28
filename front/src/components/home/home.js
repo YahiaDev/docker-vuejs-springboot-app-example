@@ -46,14 +46,9 @@ export default {
       // Exit when the form isn't valid
       if (!this.checkFormValidity()) {
         return;
-      }
-
-      console.log('book title is' + this.newBook.title);
-      
+      }  
 
       axios.post("http://localhost:8090/book/add", this.newBook).then(response => { 
-        /* eslint-disable */ 
-        console.log(response.data);
         this.books = response.data;
        });
 
