@@ -12,18 +12,21 @@ import java.util.List;
 @RequestMapping(path = "/book")
 public class BooksController {
 
-    @Autowired
-    BookService bookService;
 
+    private BookService bookService;
+
+    public BooksController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping(path = "/books")
     public ResponseEntity<List<Book>> books() {
         return ResponseEntity.ok(this.bookService.getBooks());
     }
 
-    @PostMapping(path = "/addbook")
-    public void addBook(@RequestBody Book book) {
-        this.bookService.addBook(book);
+    @PostMapping(path = "/add")
+    public ResponseEntity<List<Book>> addBook(@RequestBody Book book) {
+        return ResponseEntity.ok(this.bookService.addBook(book));
     }
 
 

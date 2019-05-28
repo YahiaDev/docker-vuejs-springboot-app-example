@@ -10,14 +10,18 @@ import java.util.List;
 @Service
 public class BookService {
 
-    @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     public List<Book> getBooks(){
         return this.bookRepository.findAll();
     }
 
-    public void addBook(Book book){
+    public List<Book> addBook(Book book){
         this.bookRepository.save(book);
+        return this.getBooks();
     }
 }
