@@ -11,7 +11,7 @@ front/node_modules/*
 
 ### Java ###
 *.class
-
+bin/
 # BlueJ files
 *.ctxt
 

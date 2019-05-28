@@ -1,9 +1,14 @@
 
 <section class="home">
   <div class="home__card">
-    
-    <b-form-input v-model="bookTitle" type="text" placeholder="Enter book title" />
-      
+    <b-row class="my-1">
+      <b-col sm="10">
+        <b-form-input v-model="bookTitle" type="text" placeholder="Enter book title" />
+      </b-col>
+      <b-col sm="2">
+        <b-button variant="success" @click="showAddBookModal">Add Book</b-button>
+      </b-col>
+    </b-row>
     <b-card v-for="(book, index) in selectedBooks" :key="book.id">
       <b-media>
         <b-img slot="aside" blank blank-color="#ccc" width="64" alt="placeholder" />
@@ -14,6 +19,44 @@
         </p>
       </b-media>
     </b-card>
+
+    <b-modal ref="add-book-modal" 
+             title="Add new Book"
+             @show="resetModal"
+             @hidden="resetModal"
+             @ok="handleOk">
+             <form ref="form" @submit.stop.prevent="handleSubmit">
+              <b-form-group
+                ref="bookTitleInput"
+                :state="bookTitleState"
+                label="Title"
+                label-for="book-title-input"
+                invalid-feedback="Name is required"
+                class="text-left">
+                <b-form-input
+                  id="book-title-input"
+                  v-model="newBook.title"
+                  :state="bookTitleState"
+                  required
+                ></b-form-input>
+              </b-form-group>
+
+              <b-form-group
+                :state="bookDescriptionState"
+                label="Description"
+                label-for="book-description-input"
+                invalid-feedback="Description is required"
+                class="text-left"
+              >
+                <b-form-textarea
+                  id="book-description-input"
+                  v-model="newBook.description"
+                  :state="bookDescriptionState"
+                  required
+                ></b-form-textarea>
+              </b-form-group>
+            </form>
+    </b-modal>
   </div>
 </section>
 
