@@ -1,3 +1,5 @@
+[![BCH compliance](https://bettercodehub.com/edge/badge/YahiaDev/docker-vuejs-springboot-app-example?branch=master)](https://bettercodehub.com/)
+
 # docker-vuejs-springboot-app-example
 simple application with vue js spring boot and docker (docker-compose).
 
